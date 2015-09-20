@@ -149,10 +149,11 @@ see `grep-find-ignored-files' for inspiration."
 (defvar helm-cmd-t-repo-types
   `(("git"         ".git"           "cd %d && git --no-pager ls-files --full-name")
     ("hg"          ".hg"            "cd %d && hg manifest")
+    ("svn"         ".svn"           "cd %d && ag -g '.*' ")
     ("bzr"         ".bzr"           "cd %d && bzr ls --versioned")
     ("perforce"    ".perforce"      helm-cmd-t-get-find)
     ("dir-locals"  ".dir-locals.el" helm-cmd-t-get-find)
-    (""            ""               helm-cmd-t-get-find))
+    (""            ""               "ag -g '.*'"))
   "root types supported.
 this is an alist of (type cookie format-string).
 
@@ -241,7 +242,8 @@ specified, then it is used to construct the root-data. "
                                                      (funcall helm-cmd-t-default-repo)
                                                    helm-cmd-t-default-repo)))))
           (and default
-               (helm-cmd-t-get-repo-root default))))))
+               (helm-cmd-t-get-repo-root default)))
+        (cons "" file))))
 
 (defun helm-cmd-t-format-age (age)
   "convert age in float to reasonable time explanation"
