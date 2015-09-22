@@ -241,7 +241,8 @@ specified, then it is used to construct the root-data. "
                                                      (funcall helm-cmd-t-default-repo)
                                                    helm-cmd-t-default-repo)))))
           (and default
-               (helm-cmd-t-get-repo-root default))))))
+               (helm-cmd-t-get-repo-root default)))
+        (cons "" file))))
 
 (defun helm-cmd-t-format-age (age)
   "convert age in float to reasonable time explanation"
